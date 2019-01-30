@@ -130,6 +130,7 @@ public class AddressBook {
     private static final String COMMAND_HELP_EXAMPLE = COMMAND_HELP_WORD;
 
     private static final String COMMAND_EXIT_WORD = "exit";
+    private static final String COMMAND_CHANGE_WORD = "change";
     private static final String COMMAND_EXIT_DESC = "Exits the program.";
     private static final String COMMAND_EXIT_EXAMPLE = COMMAND_EXIT_WORD;
 
@@ -383,6 +384,10 @@ public class AddressBook {
             return getUsageInfoForAllCommands();
         case COMMAND_EXIT_WORD:
             executeExitProgramRequest();
+
+        case COMMAND_CHANGE_WORD:
+            return executeChangeName(commandArgs);
+
         default:
             return getMessageForInvalidCommandInput(commandType, getUsageInfoForAllCommands());
         }
@@ -454,6 +459,22 @@ public class AddressBook {
         final ArrayList<String[]> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         showToUser(personsFound);
         return getMessageForPersonsDisplayedSummary(personsFound);
+    }
+
+    private static String executeChangeName(String commandArgs) {
+        final Set<String> keywords = extractKeywordsFromFindPersonArgs(commandArgs);
+        final ArrayList<String[]> numberFound= getPersonsWithNameContainingAnyKeyword(keywords);
+
+        if(numberFound.isEmpty()) {
+            return "not found";
+        }
+
+        System.out.print("Enter new name: ");
+        String newName = SCANNER.nextLine();
+        //replace name with the same phone number
+
+        return "done";
+
     }
 
     /**
