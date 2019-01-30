@@ -478,7 +478,7 @@ public class AddressBook {
 
 
         final Set<String> nameToBeFound = extractKeywordsFromFindPersonArgs(commandArgs);
-        String[] personToBeChange;
+        String[] personToBeChange = new String[0];
         for (String[] person : getAllPersonsInAddressBook()) {
             final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
             if (!Collections.disjoint(wordsInName, nameToBeFound)) {
