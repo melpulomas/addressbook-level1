@@ -386,7 +386,7 @@ public class AddressBook {
             executeExitProgramRequest();
 
         case COMMAND_CHANGE_WORD:
-            return executeChangeName(commandArgs);
+            return executeChangeNumber(commandArgs);
 
         default:
             return getMessageForInvalidCommandInput(commandType, getUsageInfoForAllCommands());
@@ -461,19 +461,40 @@ public class AddressBook {
         return getMessageForPersonsDisplayedSummary(personsFound);
     }
 
-    private static String executeChangeName(String commandArgs) {
-        final Set<String> keywords = extractKeywordsFromFindPersonArgs(commandArgs);
-        final ArrayList<String[]> numberFound= getPersonsWithNameContainingAnyKeyword(keywords);
+    /**
+     * Finds the person based on the name and changes the person number.
+     *
+     * @param commandArgs full command args string from the user
+     * @return shows the full data of the user with the new phone number.
+     */
 
-        if(numberFound.isEmpty()) {
+    private static String executeChangeNumber(String commandArgs) {
+        final Set<String> keywords = extractKeywordsFromFindPersonArgs(commandArgs);
+        final ArrayList<String[]> personsFound= getPersonsWithNameContainingAnyKeyword(keywords);
+
+        if(personsFound.isEmpty()) {
             return "not found";
         }
 
-        System.out.print("Enter new name: ");
-        String newName = SCANNER.nextLine();
-        //replace name with the same phone number
 
-        return "done";
+        final Set<String> nameToBeFound = extractKeywordsFromFindPersonArgs(commandArgs);
+        String[] personToBeChange;
+        for (String[] person : getAllPersonsInAddressBook()) {
+            final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
+            if (!Collections.disjoint(wordsInName, nameToBeFound)) {
+                personToBeChange = person;
+                break;
+            }
+        }
+
+        System.out.println("Enter new number: ");
+        String newNumber = SCANNER.nextLine();
+        personToBeChange[PERSON_DATA_INDEX_PHONE] = newNumber;
+        //replace number of the user with the stated name.
+        deletePersonFromAddressBook(personToBeChange);
+        addPersonToAddressBook(personToBeChange);
+
+        return getMessageForPersonsDisplayedSummary(personsFound);
 
     }
 
