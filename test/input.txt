@@ -45,8 +45,9 @@
 # test change person command, setup state for future tests
 ##########################################################
 
+# This should change the phone number of Betsy
 change Betsy
-33333
+66666
 list
 
 ##########################################################

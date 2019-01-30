@@ -487,7 +487,7 @@ public class AddressBook {
             }
         }
 
-        System.out.println("Enter new number: ");
+        System.out.println("|| Enter new number: ");
         String newNumber = SCANNER.nextLine();
         personToBeChange[PERSON_DATA_INDEX_PHONE] = newNumber;
         //replace number of the user with the stated name.
