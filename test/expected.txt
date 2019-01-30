@@ -136,7 +136,13 @@
 || 	1. Adam Brown  Phone Number: 111111  Email: adam@gmail.com
 || 	2. Betsy Choo  Phone Number: 222222  Email: benchoo@nus.edu.sg
 || 
-|| 2 persons found!
+|| 2 persons found!===================================================
+|| Enter command: change Betsy
+|| [Command entered:change Betsy]
+Enter new number: 
+333333
+|| 1 persons found!
+|| ===================================================
 || ===================================================
 || Enter command: || [Command entered:  add Charlie Dickson e/charlie.d@nus.edu.sg p/333333]
 || New person added: Charlie Dickson, Phone: 333333, Email: charlie.d@nus.edu.sg
